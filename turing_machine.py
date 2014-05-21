@@ -46,4 +46,3 @@ class TuringMachine:
         elif self.current_state in self.reject_states:
             print(self.tape)
             return 'reject'
-
