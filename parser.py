@@ -25,9 +25,10 @@ accept_regex = r'^(accept:\s*){(}|([0-9]*,)*[0-9]*}|[0-9]*})$'
 reject_regex = r'^(reject:\s*){(}|([0-9]*,)*[0-9]*}|[0-9]*})$'
 initial_regex = r'^(initial:\s*)([0-9]*)$'
 tape_regex = r'^(tape:\s*)(\((.)*,(.)*,(.)*\))$'
+user_tape_regex = r'^\s*\(.*,.,.*\)$'
 
 
-def parse_validator(program_name = None):
+def parse_validator_from_file(program_name = None):
     line_counter = 1
     try:
         with open(program_name, "rt") as program:
@@ -71,3 +72,12 @@ def parse_validator(program_name = None):
         print('More specifically, the error lies within:\n', error.messed_line)
         raise  
     return TuringMachine(initial_tape,states,accept_states,reject_states,initial_state,*machine_rules)
+
+
+def parse_validator_from_terminal(rules, states, accept_states, reject_states, initial_state, tapee):
+    if re.match(user_tape_regex, tapee.strip('\n')) == None:
+        print('error')
+    else:
+        turing_tape = re.match(user_tape_regex, tapee.strip('\n'))
+        initial_tape = tape.Tape(*turing_tape.group().strip(')(').split(','))
+    print(initial_tape)
