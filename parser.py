@@ -76,7 +76,7 @@ def parse_validator_from_file(program_name = None):
     return TuringMachine(initial_tape,states,accept_states,reject_states,initial_state,*machine_rules)
 
 
-def parse_validator_from_terminal(rules, statess, accept_states, reject_states, initial_state, tapee):
+def parse_validator_from_terminal(ruless, statess, accept_statess, reject_statess, initial_statee, tapee):
     # if re.match(user_tape_regex, tapee.strip('\n')) == None:
     #     print('error')
     # else:
@@ -92,3 +92,12 @@ def parse_validator_from_terminal(rules, statess, accept_states, reject_states, 
     #     for state in turing_states.group().strip('}').split(','):
     #         states.add(int(state))
     #     print(states)
+
+    # if accept_statess == '': pass
+    # elif re.match(user_states_regex, accept_statess.strip('\n')) == None:
+    #     print('error')
+    # else:
+    #         turing_accept = re.match(user_states_regex, accept_statess.strip('\n'))
+    #         for state in turing_accept.group().strip('}').split(','):
+    #             states.add(int(state))
+    #         print(states)

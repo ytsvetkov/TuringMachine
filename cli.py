@@ -53,8 +53,10 @@ def main_cli_action():
 
     # tape = input('Initialise the tape:\n')
     # parser.parse_validator_from_terminal(1,2,3,4,5,tape)
-    states = input('Enter the states:\n')
-    parser.parse_validator_from_terminal(1,states,3,4,5,6)
+    # states = input('Enter the states:\n')
+    # parser.parse_validator_from_terminal(1,states,3,4,5,6)
+    accept_states = input('Enter the accept states\n')
+    parser.parse_validator_from_terminal(1,2,accept_states,4,5,6)
 
 
 
