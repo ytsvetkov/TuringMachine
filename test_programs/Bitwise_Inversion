@@ -1,0 +1,11 @@
+(0,a,b,0,Right)
+(0,b,a,0,Right)
+(0,_,_,1,None)
+
+(1,_,_,1,None)
+
+states: {0,1}
+accept: {1}
+reject: {1}
+initial: 0
+tape: (,b,ababaabbbaababab)
