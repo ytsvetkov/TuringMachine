@@ -6,10 +6,13 @@ import turing_machine
 
 def machine_builder(tapee, statess, accept_statess,
                        reject_statess, initial_statee, ruless):
+    print(tapee, statess, accept_statess,
+                       reject_statess, initial_statee, ruless)
     rule_book = []
     for rulee in ruless:
         rule_book.append(rule.Rule(*rulee))
     tapeee = tape.Tape(*tapee)
+    print(tapeee, statess, accept_statess, reject_statess, initial_statee, rule_book)
     return turing_machine.TuringMachine(tapeee, statess, accept_statess,
                                         reject_statess, initial_statee,
                                         *rule_book)

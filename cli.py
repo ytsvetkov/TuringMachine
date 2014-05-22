@@ -30,7 +30,7 @@ def main_cli_action():
             rule = input()
             rules.append(rule)
     except EOFError:
-        input_parser.parse_validator_from_terminal(rules, states, accept_states,
+        return input_parser.parse_validator_from_terminal(rules, states, accept_states,
                                              reject_states, initial_state, tape)
 
 
@@ -39,4 +39,5 @@ try:
     machine = file_parser.parse_validator_from_file(sys.argv[1])
     print(machine.run())
 except:
-    main_cli_action()
+    machine = main_cli_action()
+    print(machine.run())
