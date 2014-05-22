@@ -6,9 +6,12 @@ import input_parser
 from turing_machine import *
 
 
-accept_invite_message = 'If you need another accept state, enter the number !\n'
-reject_invite_message = 'If you need another reject state, enter the number !\n'
-unaccepted_value_message = 'Unacceptable value for accept state. Please enter again !\n'
+accept_invite_message = 'If you need another accept state, \
+                        enter the number !\n'
+reject_invite_message = 'If you need another reject state, \
+                        enter the number !\n'
+unaccepted_value_message = 'Unacceptable value for accept state. \
+                        Please enter again !\n'
 current_message = 'If you need accept state, enter the number !\n'
 
 states = set()
@@ -30,8 +33,9 @@ def main_cli_action():
             rule = input()
             rules.append(rule)
     except EOFError:
-        return input_parser.parse_validator_from_terminal(rules, states, accept_states,
-                                             reject_states, initial_state, tape)
+        return input_parser.parse_validator_from_terminal(
+            rules, states, accept_states,
+            reject_states, initial_state, tape)
 
 
 try:

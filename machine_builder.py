@@ -4,8 +4,9 @@ import rule
 import tape
 import turing_machine
 
+
 def machine_builder(tapee, statess, accept_statess,
-                       reject_statess, initial_statee, ruless):
+                    reject_statess, initial_statee, ruless):
     rule_book = []
     for rulee in ruless:
         rule_book.append(rule.Rule(*rulee))

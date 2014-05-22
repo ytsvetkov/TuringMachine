@@ -34,4 +34,5 @@ class Tape:
             self.right == other.right
 
     def __repr__(self):
-        return "<Tape {}({}){}>".format(''.join(self.left) , self.middle, ''.join(self.right))
+        return "<Tape {}({}){}>".format(''.join(self.left),
+                                        self.middle, ''.join(self.right))

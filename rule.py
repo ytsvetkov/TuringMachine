@@ -23,4 +23,5 @@ class Rule:
             self.direction == other.direction
 
     def can_be_applied(self, state, read_character):
-        return self.current_state == state and self.read_character == read_character
+        return self.current_state == state and\
+            self.read_character == read_character

@@ -1,8 +1,8 @@
 import unittest
-from rule import Rule
+from tape import Tape
 
 
-class RuleTest(unittest.TestCase):
+class RulesTest(unittest.TestCase):
     pass
 
 

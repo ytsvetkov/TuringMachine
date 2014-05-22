@@ -24,7 +24,7 @@ initial_regex = r'^(initial:\s*)([0-9]*)$'
 tape_regex = r'^(tape:\s*)(\((.)*,(.)*,(.)*\))$'
 
 
-def parse_validator_from_file(program_name = None):
+def parse_validator_from_file(program_name=None):
     line_counter = 1
     try:
         with open(program_name, "rt") as program:
@@ -67,4 +67,6 @@ def parse_validator_from_file(program_name = None):
         print(error.message)
         print('More specifically, the error lies within:\n', error.messed_line)
         raise
-    return machine_builder.machine_builder(initial_tape,states,accept_states,reject_states,initial_state,machine_rules)
+    return machine_builder.machine_builder(initial_tape, states, accept_states,
+                                           reject_states, initial_state,
+                                           machine_rules)

@@ -1,5 +1,6 @@
 import rule
 
+
 class Rule_Book:
 
     def __init__(self, *rules):
@@ -9,7 +10,7 @@ class Rule_Book:
     def __repr__(self):
         string = ''
         for i in self.rules:
-            string += str(i)+'\n'
+            string += str(i) + '\n'
         return string
 
     def __eq__(self, other):
