@@ -101,3 +101,12 @@ def parse_validator_from_terminal(ruless, statess, accept_statess, reject_states
     #         for state in turing_accept.group().strip('}').split(','):
     #             states.add(int(state))
     #         print(states)
+
+    if reject_statess == '': pass
+    elif re.match(user_states_regex, reject_statess.strip('\n')) == None:
+        print('error')
+    else:
+            turing_accept = re.match(user_states_regex, reject_statess.strip('\n'))
+            for state in turing_accept.group().strip('}').split(','):
+                states.add(int(state))
+            print(states)
