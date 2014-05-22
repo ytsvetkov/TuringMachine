@@ -1,11 +1,13 @@
 import sys
 import os
 import re
+import parser
+from turing_machine import *
 
 
 accept_invite_message = 'If you need another accept state, enter the number !\n'
 reject_invite_message = 'If you need another reject state, enter the number !\n'
-unaccepted_value_message = 'Unacceptable value for accpet state. Please enter again !\n'
+unaccepted_value_message = 'Unacceptable value for accept state. Please enter again !\n'
 current_message = 'If you need accept state, enter the number !\n'
 
 
@@ -47,11 +49,9 @@ def main_cli_action():
         print('exit')
 
 
-# try:
-#     sys.argv[1]
-#     while True:
-#         program = open(sys.argv[1], 'r'):
-#         x=program.readline()
-#         print(x)
-# except:
-#     main_cli_action()
+try:
+    sys.argv[1]
+    machine = parser.parse_validator(sys.argv[1])
+    print(machine.run())
+except:
+    main_cli_action()

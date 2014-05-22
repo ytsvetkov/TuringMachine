@@ -12,6 +12,11 @@ class Rule_Book:
             string += str(i)+'\n'
         return string
 
+    def __eq__(self, other):
+        for i in self.rules:
+            if i not in other.rules:
+                return False
+        return len(self.rules) == len(other. rules)
 
     def is_deterministic(self):
         for rule_1 in self.rules:
@@ -27,6 +32,7 @@ class Rule_Book:
         for rule in self.rules:
             if rule.can_be_applied(read_character, state):
                 return True
+        return False
 
     def get_rule(self, state, character):
         for rule in self.rules:
