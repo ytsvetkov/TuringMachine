@@ -27,7 +27,8 @@ initial_regex = r'^(initial:\s*)([0-9]*)$'
 tape_regex = r'^(tape:\s*)(\((.)*,(.)*,(.)*\))$'
 
 user_tape_regex = r'^\s*\(.*,.,.*\)$'
-user_states_regex = r'^([0-9]*,)*[0-9]*$'
+user_states_regex = r'^([0-9]*,)*[0-9]+$'
+user_initial_regex = r'^[0-9]+$'
 
 
 def parse_validator_from_file(program_name = None):
@@ -84,8 +85,7 @@ def parse_validator_from_terminal(ruless, statess, accept_statess, reject_states
     #     initial_tape = tape.Tape(*turing_tape.group().strip(')(').split(','))
     # print(initial_tape)
 
-    # if statess == '': pass
-    # elif re.match(user_states_regex, statess.strip('\n')) == None:
+    # if re.match(user_states_regex, statess.strip('\n')) == None:
     #     print('error')
     # else:
     #     turing_states = re.match(user_states_regex, statess.strip('\n'))
@@ -102,11 +102,18 @@ def parse_validator_from_terminal(ruless, statess, accept_statess, reject_states
     #             states.add(int(state))
     #         print(states)
 
-    if reject_statess == '': pass
-    elif re.match(user_states_regex, reject_statess.strip('\n')) == None:
-        print('error')
-    else:
-            turing_accept = re.match(user_states_regex, reject_statess.strip('\n'))
-            for state in turing_accept.group().strip('}').split(','):
-                states.add(int(state))
-            print(states)
+    # if reject_statess == '': pass
+    # elif re.match(user_states_regex, reject_statess.strip('\n')) == None:
+    #     print('error')
+    # else:
+    #         turing_accept = re.match(user_states_regex, reject_statess.strip('\n'))
+    #         for state in turing_accept.group().strip('}').split(','):
+    #             states.add(int(state))
+    #         print(states)
+
+    # if re.match(user_initial_regex, initial_statee.strip('\n')) == None:
+    #     print('error')
+    # else:
+    #         turing_initial = re.match(user_initial_regex, initial_statee.strip('\n'))
+    #         initial = int(turing_initial.group())
+    #         print(initial)
