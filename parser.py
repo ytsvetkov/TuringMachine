@@ -26,9 +26,12 @@ reject_regex = r'^(reject:\s*){(}|([0-9]*,)*[0-9]*}|[0-9]*})$'
 initial_regex = r'^(initial:\s*)([0-9]*)$'
 tape_regex = r'^(tape:\s*)(\((.)*,(.)*,(.)*\))$'
 
+
 user_tape_regex = r'^\s*\(.*,.,.*\)$'
 user_states_regex = r'^([0-9]*,)*[0-9]+$'
 user_initial_regex = r'^[0-9]+$'
+user_rule_regex = r'^\([0-9]{1,},.,.,[0-9]{1,},(Left|None|Right)\)$'
+
 
 
 def parse_validator_from_file(program_name = None):
@@ -117,3 +120,13 @@ def parse_validator_from_terminal(ruless, statess, accept_statess, reject_states
     #         turing_initial = re.match(user_initial_regex, initial_statee.strip('\n'))
     #         initial = int(turing_initial.group())
     #         print(initial)
+
+    for rulee in ruless:
+        if re.match(user_rule_regex, rulee) == None :
+            raise SyntacticError(rulee, 434)
+        else:
+            turing_rule = rulee.strip('\n)(').split(',')
+            turing_rule[0] = int(turing_rule[0])
+            turing_rule[3] = int(turing_rule[3])
+            machine_rules.append(rule.Rule(*turing_rule))
+    print(machine_rules)

@@ -10,9 +10,10 @@ reject_invite_message = 'If you need another reject state, enter the number !\n'
 unaccepted_value_message = 'Unacceptable value for accept state. Please enter again !\n'
 current_message = 'If you need accept state, enter the number !\n'
 
-
+states = set()
 reject_states = set()
 accept_states = set()
+rules = []
 
 
 
@@ -53,15 +54,21 @@ def main_cli_action():
 
     # tape = input('Initialise the tape:\n')
     # parser.parse_validator_from_terminal(1,2,3,4,5,tape)
-    states = input('Enter the states:\n')
-    parser.parse_validator_from_terminal(1,states,3,4,5,6)
+    # states = input('Enter the states:\n')
+    # parser.parse_validator_from_terminal(1,states,3,4,5,6)
     # accept_states = input('Enter the accept states\n')
     # parser.parse_validator_from_terminal(1,2,accept_states,4,5,6)
     # reject_states = input('Enter the reject states\n')
     # parser.parse_validator_from_terminal(1,2,3,reject_states,5,6)
     # initial_state = input('Enter the initial state\n')
     # parser.parse_validator_from_terminal(1,2,3,4,initial_state,6)
-
+    print(('Enter a rule or press Ctrl+D for end of rules'))
+    try:
+        while True:
+            x = input()
+            rules.append(x)
+    except EOFError: 
+        parser.parse_validator_from_terminal(rules,2,3,4,5,6)
 
 
 
