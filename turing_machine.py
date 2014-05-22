@@ -33,7 +33,7 @@ class TuringMachine:
 
     def run(self):
         print(self.tapee, "Initial tape", self.current_state)
-        while (self.current_state not in self.accept_states) or (self.current_state not in self.reject_states):
+        while (self.current_state not in self.accept_states) and (self.current_state not in self.reject_states):
             read_character = self.tapee.read()
             if self.rules.can_be_applied(self.current_state, read_character):
                 rule_to_apply = self.rules.get_rule(
