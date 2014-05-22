@@ -24,7 +24,7 @@ class TuringMachine:
             raise TypeError
 
     def run(self):
-        print(self.tape)
+        print(self.tape, "Initial tape", self.current_state)
         while (self.current_state not in self.accept_states) or (self.current_state not in self.reject_states):
             read_character = self.tape.read()
             if self.rules.can_be_applied(self.current_state, read_character):
@@ -39,10 +39,9 @@ class TuringMachine:
                 self.current_state = rule_to_apply.next_state
             else:
                 break
-            print(self.tape)
+            print(self.tape, self.current_state)
         if self.current_state in self.accept_states:
-            print(self.tape)
             return 'accept'
         elif self.current_state in self.reject_states:
-            print(self.tape)
             return 'reject'
+
