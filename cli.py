@@ -3,66 +3,61 @@ import os
 import re
 import file_parser
 import input_parser
-from turing_machine import *
 import machine_builder
+from turing_machine import *
 
 
-accept_invite_message = 'If you need another accept state, \
-                        enter the number !\n'
-reject_invite_message = 'If you need another reject state, \
-                        enter the number !\n'
-unaccepted_value_message = 'Unacceptable value for accept state. \
-                        Please enter again !\n'
-current_message = 'If you need accept state, enter the number !\n'
-
+tape = ''
 states = set()
 reject_states = set()
 accept_states = set()
+initial_state = 0
 rules = []
+
+
+structures = {0: (
+    'Initialise the tape\n', input_parser.parse_tape_from_terminal),
+    1: ('Enter the states:\n', input_parser.parse_states_from_terminal),
+    2: ('Enter the accept states\n', input_parser.parse_states_from_terminal),
+    3: ('Enter the reject states\n', input_parser.parse_states_from_terminal),
+    4: ('Enter the initial state\n', input_parser.parse_initial_from_terminal)
+}
+
+machine_parts = {0: tape,
+                 1: states,
+                 2: accept_states,
+                 3: reject_states,
+                 4: initial_state
+                 }
+
+
+def user_input(i, struct=None):
+    while True:
+        struct = input(structures[i][0])
+        struct = structures[i][1](struct)
+        if isinstance(struct, input_parser.SyntacticError):
+            print(struct.message)
+        else:
+            return struct
 
 
 def main_cli_action():
 
-    while True:
-        tape = input('Initialise the tape:\n')
-        tape = input_parser.parse_tape_from_terminal(tape)
-        if isinstance(tape, input_parser.SyntacticError): print('error')
-        else: break
-
-    while True:
-        states = input('Enter the states:\n')
-        states = input_parser.parse_states_from_terminal(states)
-        if isinstance(states, input_parser.SyntacticError): print('error')
-        else: break
-        
-    while True:
-        accept_states = input('Enter the accept states\n')
-        accept_states = input_parser.parse_states_from_terminal(accept_states)
-        if isinstance(accept_states, input_parser.SyntacticError): print('error')
-        else: break
-
-    while True:
-        reject_states = input('Enter the reject states\n')
-        reject_states = input_parser.parse_states_from_terminal(reject_states)
-        if isinstance(reject_states, input_parser.SyntacticError): print('error')
-        else: break
-
-    while True:
-        initial_state = input('Enter the initial state\n')
-        initial_state = input_parser.parse_initial_from_terminal(initial_state)
-        if isinstance(initial_state, input_parser.SyntacticError): print('error')
-        else: break
+    for i in range(5):
+        machine_parts[i] = user_input(i, structures[i][1])
 
     try:
         while True:
             rule = input('Enter a rule\n')
             rule = input_parser.parse_rule_from_terminal(rule)
-            if isinstance(rule, input_parser.SyntacticError): print('error')
-            else: rules.append(rule)
+            if isinstance(rule, input_parser.SyntacticError):
+                print(rule.message)
+            else:
+                rules.append(rule)
     except EOFError:
-        return machine_builder.machine_builder(tape, states, accept_states,
-                    reject_states, initial_state, rules)
-
+        return machine_builder.machine_builder(
+            machine_parts[0], machine_parts[1], machine_parts[2],
+            machine_parts[3], machine_parts[4], rules)
 
 try:
     sys.argv[1]

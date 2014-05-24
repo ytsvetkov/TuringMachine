@@ -1,6 +1,5 @@
 import sys
 import re
-import machine_builder
 
 
 class SyntacticError(Exception):
@@ -37,7 +36,8 @@ def parse_states_from_terminal(input_states):
 def parse_initial_from_terminal(intput_initial_state):
     initial = re.match(user_initial_regex, intput_initial_state.strip('\n'))
     if initial == None:
-        return SyntacticError('There is syntactic error with the initial state !')
+        return SyntacticError('There is syntactic error \
+                                with the initial state !')
     else:
         return int(initial.group())
 
