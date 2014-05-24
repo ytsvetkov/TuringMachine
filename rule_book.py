@@ -22,8 +22,11 @@ class Rule_Book:
     def is_deterministic(self):
         for rule_1 in self.rules:
             for rule_2 in self.rules:
-                if (rule_1 is not rule_2) and (rule_1 == rule_2):
+                if (rule_1 != rule_2) and\
+                    (rule_1.read_character == rule_2.read_character) and\
+                        (rule_1.current_state == rule_2.current_state):
                     raise TypeError("This allows nondeterministic behaviour!")
+        return True
 
     def add_rule(self, rule):
         self.rules.append(rule)
