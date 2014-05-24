@@ -5,7 +5,7 @@ class Tape:
 
     empty = '_'
 
-    def __init__(self, left, middle, right):
+    def __init__(self, left=empty, middle=empty, right=empty):
         self.left = deque(left)
         self.middle = middle
         self.right = deque(right)

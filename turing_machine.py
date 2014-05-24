@@ -7,9 +7,9 @@ class TuringMachine:
 
     def __init__(self, tapee, states, accept_states,
                  reject_states, current_state, *rules):
-        self.tapee = tapee
         self.correct_states(states, accept_states,
                             reject_states, current_state)
+        self.tapee = tapee
         self.states = set(states)
         self.accept_states = set(accept_states)
         self.reject_states = set(reject_states)
@@ -32,6 +32,7 @@ class TuringMachine:
     def correct_states(self, states, final_states,
                        reject_states, current_state):
         if not final_states in states and reject_states in states and\
+                current_state not in final_states and\
                 set(final_states).intersection(set(reject_states)):
             raise TypeError
 
@@ -54,7 +55,7 @@ class TuringMachine:
                 self.current_state = rule_to_apply.next_state
             else:
                 break
-            print(self.tapee, self.current_state)
+            print(self.tapee)
 
         if self.current_state in self.accept_states:
             return 'accept'
