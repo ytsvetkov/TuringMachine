@@ -96,7 +96,9 @@ def parse_validator_from_file(program_name=None):
             for line in program:
                 if line == '\n' or line.strip('\n')[0] == '#':
                     line_counter += 1
-                elif line[0] == '(':
+                    continue
+                line = re.sub(r'#.*', '', line)
+                if line[0] == '(':
                     rule = parse_rule_from_file(line, line_counter)
                     machine_rules.append(rule)
                     line_counter += 1
