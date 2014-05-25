@@ -19,6 +19,9 @@ class Rule_Book:
                 return False
         return len(self.rules) == len(other. rules)
 
+    def __getitem__(self, index):
+        return self.rules[index]
+
     def is_deterministic(self):
         for rule_1 in self.rules:
             for rule_2 in self.rules:
