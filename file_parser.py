@@ -94,7 +94,7 @@ def parse_validator_from_file(program_name=None):
     try:
         with open(program_name, "rt") as program:
             for line in program:
-                if line == '\n':
+                if line == '\n' or line.strip('\n')[0] == '#':
                     line_counter += 1
                 elif line[0] == '(':
                     rule = parse_rule_from_file(line, line_counter)
@@ -117,6 +117,8 @@ def parse_validator_from_file(program_name=None):
                 elif line[0] == 'i':
                     initial_state = parse_initial_from_file(line, line_counter)
                     line_counter += 1
+                else:
+                    raise SyntacticError('There is syntactic error.', line_counter)
     except SyntacticError as error:
         print(error.message)
         print('More specifically, the error lies within:\n', error.messed_line)
