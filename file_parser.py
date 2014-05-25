@@ -1,11 +1,10 @@
 import sys
 import re
-import machine_builder
 
 
 class SyntacticError(Exception):
 
-    def __init__(self, message, messed_line):
+    def __init__(self, message, messed_line=5):
         self.message = message
         self.messed_line = messed_line
 
@@ -24,6 +23,72 @@ initial_regex = r'^(initial:\s*)([0-9]*)$'
 tape_regex = r'^(tape:\s*)(\((.)*,(.)*,(.)*\))$'
 
 
+def parse_tape_from_file(file_tape, line_counter):
+    tape = re.match(tape_regex, file_tape.strip('\n'))
+    if tape is None:
+        return SyntacticError('There is syntactic error \
+                                with this tape !', line_counter)
+    else:
+        return tape.group().strip(')(').split(',')
+
+
+def parse_states_from_file(file_states, line_counter):
+    states = re.match(states_regex, file_states.strip('\n'))
+    if states is None:
+        return SyntacticError('There is syntactic error \
+                                with these states !', line_counter)
+    else:
+        machine_states = set()
+        for state in states.group(2).strip('}').split(','):
+            machine_states.add(int(state))
+        return machine_states
+
+
+def parse_accept_states_from_file(file_accept_states, line_counter):
+    accept_states = re.match(accept_regex, file_accept_states.strip('\n'))
+    if accept_states is None:
+        return SyntacticError('There is syntactic error with these states !',
+                              line_counter)
+    else:
+        machine_states = set()
+        for state in accept_states.group(2).strip('}').split(','):
+            machine_states.add(int(state))
+        return machine_states
+
+
+def parse_reject_states_from_file(file_reject_states, line_counter):
+    reject_states = re.match(reject_regex, file_reject_states.strip('\n'))
+    if reject_states is None:
+        return SyntacticError('There is syntactic error with these states !',
+                              line_counter)
+    else:
+        machine_states = set()
+        for state in reject_states.group(2).strip('}').split(','):
+            machine_states.add(int(state))
+        return machine_states
+
+
+def parse_initial_from_file(file_initial_state, line_counter):
+    initial = re.match(initial_regex, file_initial_state.strip('\n'))
+    if initial is None:
+        return SyntacticError('There is syntactic error \
+                                with the initial state !', line_counter)
+    else:
+        return int(initial.group(2))
+
+
+def parse_rule_from_file(file_rule, line_counter):
+    file_rule = re.match(rule_regex, file_rule)
+    if file_rule is None:
+        return SyntacticError('There is syntactic error with this rule !',
+                              line_counter)
+    else:
+        rule = file_rule.group().strip('\n)(').split(',')
+        rule[0] = int(rule[0])
+        rule[3] = int(rule[3])
+    return rule
+
+
 def parse_validator_from_file(program_name=None):
     line_counter = 1
     try:
@@ -31,42 +96,30 @@ def parse_validator_from_file(program_name=None):
             for line in program:
                 if line == '\n':
                     line_counter += 1
-                elif re.match(rule_regex, line.strip('\n')):
-                    turing_rule = line.strip('\n)(').split(',')
-                    turing_rule[0] = int(turing_rule[0])
-                    turing_rule[3] = int(turing_rule[3])
-                    machine_rules.append(turing_rule)
+                elif line[0] == '(':
+                    rule = parse_rule_from_file(line, line_counter)
+                    machine_rules.append(rule)
                     line_counter += 1
-                elif re.match(states_regex, line.strip('\n')) != None:
-                    turing_states = re.match(states_regex, line.strip('\n'))
-                    for state in turing_states.group(2).strip('}').split(','):
-                        states.add(int(state))
+                elif line[0] == 't':
+                    tape = parse_tape_from_file(line, line_counter)
                     line_counter += 1
-                elif re.match(accept_regex, line.strip('\n')) != None:
-                    turing_accept = re.match(accept_regex, line.strip('\n'))
-                    for state in turing_accept.group(2).strip('}').split(','):
-                        accept_states.add(int(state))
+                elif line[0] == 's':
+                    states = parse_states_from_file(line, line_counter)
                     line_counter += 1
-                elif re.match(reject_regex, line.strip('\n')) != None:
-                    turing_reject = re.match(reject_regex, line.strip('\n'))
-                    for state in turing_reject.group(2).strip('}').split(','):
-                        reject_states.add(int(state))
+                elif line[0] == 'a':
+                    accept_states = parse_accept_states_from_file(
+                        line, line_counter)
                     line_counter += 1
-                elif re.match(tape_regex, line.strip('\n')) != None:
-                    turing_tape = re.match(tape_regex, line.strip('\n'))
-                    initial_tape = turing_tape.group(2).strip(')(').split(',')
+                elif line[0] == 'r':
+                    reject_states = parse_reject_states_from_file(
+                        line, line_counter)
                     line_counter += 1
-                elif re.match(initial_regex, line.strip('\n')) != None:
-                    turing_initial = re.match(initial_regex, line.strip('\n'))
-                    initial_state = int(turing_initial.group(2))
-                else:
+                elif line[0] == 'i':
+                    initial_state = parse_initial_from_file(line, line_counter)
                     line_counter += 1
-                    raise SyntacticError("Syntactic error on line %d" %
-                                         line_counter, line.strip('\n'))
     except SyntacticError as error:
         print(error.message)
         print('More specifically, the error lies within:\n', error.messed_line)
         raise
-    return machine_builder.machine_builder(initial_tape, states, accept_states,
-                                           reject_states, initial_state,
-                                           machine_rules)
+    return (tape, states, accept_states, reject_states,
+            initial_state, machine_rules)

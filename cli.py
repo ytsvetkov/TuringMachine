@@ -60,9 +60,8 @@ def main_cli_action():
             machine_parts[3], machine_parts[4], rules)
 
 try:
-    sys.argv[1]
     machine = file_parser.parse_validator_from_file(sys.argv[1])
-    print(machine.run())
-except:
+    print(machine_builder.machine_builder(*machine).run())
+except IndexError:
     machine = main_cli_action()
     print(machine.run())
