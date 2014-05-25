@@ -2,6 +2,7 @@ import unittest
 import rule
 import rule_book
 
+
 class RulesTest(unittest.TestCase):
 
     def test_deterministic(self):
