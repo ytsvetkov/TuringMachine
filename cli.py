@@ -4,6 +4,7 @@ import re
 import file_parser
 import input_parser
 import machine_builder
+import automata_graph
 from turing_machine import *
 
 
@@ -62,6 +63,8 @@ def main_cli_action():
 try:
     machine = file_parser.parse_validator_from_file(sys.argv[1])
     print(machine_builder.machine_builder(*machine).run())
+    automata_graph.draw_automata(machine_builder.machine_builder(*machine))
 except IndexError:
     machine = main_cli_action()
     print(machine.run())
+    automata_graph.draw_automata((machine))
