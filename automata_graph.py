@@ -4,7 +4,7 @@ from tkinter import *
 state_position = {}
 
 
-def draw_arrow(i, j, canvas, counter):
+def draw_arrow(i, j, canvas, counter, rule):
     if i == j:
         canvas.create_oval(10 + 80 * j, 390 - 10, 10 + 80 * i + 20 + 5, 410)
         canvas.create_line(10 + 80 * i - 5 + 25, 400, 10 + 80 *
@@ -14,12 +14,20 @@ def draw_arrow(i, j, canvas, counter):
 
     else:
         canvas.create_line(10 + 80 * i, 400, 10 + 80 * i, i + (-10)
-                           * counter + 400, width=1, fill='blue')
-        canvas.create_line(10 + 80 * i, i + (-10) * counter + 400,
-                           10 + 80 * j+35, i + (-10) * counter + 400,
+                           * counter * 1.7 + 400, width=1, fill='blue')
+        canvas.create_line(10 + 80 * i, i + (-10) * counter * 1.7 + 400,
+                           10 + 80 * j+35, i + (-10) * counter * 1.7 + 400,
                            width=1, fill='blue')
-        canvas.create_line(10 + 80 * j+35, i + (-10) * counter + 400,
+
+        canvas_id = canvas.create_text(((10 + 80 * j+35)+(10 + 80 * i))/2, i + (-10) * counter * 1.7 + 385, anchor="nw")
+        canvas_id = canvas.create_text(10 + 80 * i, i + (-10) * counter * 1.7 + 385, anchor="nw")
+        canvas.itemconfig(canvas_id, text="%s" % rule)
+        canvas.insert(canvas_id, 12, "")
+
+        canvas.create_line(10 + 80 * j+35, i + (-10) * counter * 1.7 + 400,
                            10 + 80 * j+35, 400, width=1, fill='blue')
+        canvas.create_line(10 + 80 * j+30, 395, 10 + 80 * j+35, 400, width=1, fill='blue')
+        canvas.create_line(10 + 80 * j+40, 395, 10 + 80 * j+35, 400, width=1, fill='blue')
     return counter + 1
 
 
@@ -42,6 +50,7 @@ def draw_automata(turing_machine=None):
     counter = 1
     for rule in turing_machine.rules:
         counter = draw_arrow(state_position[rule.current_state],
-                             state_position[rule.next_state], canvas, counter)
+                             state_position[rule.next_state], canvas, counter, rule)
+
 
     master.mainloop()
