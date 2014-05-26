@@ -73,4 +73,4 @@ except IndexError:
     draw_automata_decision = input(
         "Do you want to see  a graphical representation ?\n")
     if draw_automata_decision == 'y' or draw_automata_decision == 'yes':
-        automata_graph.draw_automata(machine_builder.machine_builder(*machine))
+        automata_graph.draw_automata(machine)
