@@ -37,7 +37,7 @@ class TuringMachine:
             raise TypeError
 
     def run(self):
-        print(self.tapee, "Initial tape", self.current_state)
+        print(self.tapee, "Initial tape")
         while (self.current_state not in self.accept_states) and\
                 (self.current_state not in self.reject_states):
 
