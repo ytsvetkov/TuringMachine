@@ -1,10 +1,12 @@
-import rule
+import rule as _rule
 
 
 class Rule_Book:
 
-    def __init__(self, *rules):
-        self.rules = list(rules)
+    def __init__(self, rules):
+        self.rules = []
+        for rule in rules:
+            self.rules.append(_rule.Rule(*rule))
         self.is_deterministic()
 
     def __repr__(self):
