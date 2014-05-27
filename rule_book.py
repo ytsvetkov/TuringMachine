@@ -24,6 +24,9 @@ class Rule_Book:
     def __getitem__(self, index):
         return self.rules[index]
 
+    def __len__(self):
+        return len(self.rules)
+
     def is_deterministic(self):
         for rule_1 in self.rules:
             for rule_2 in self.rules:
