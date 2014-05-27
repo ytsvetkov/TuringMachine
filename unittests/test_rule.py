@@ -1,4 +1,6 @@
+import sys
 import unittest
+sys.path.append('/home/thepuppeteer/Projects/Python/Project/')
 from rule import Rule
 
 

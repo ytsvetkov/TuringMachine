@@ -3,7 +3,8 @@ import unittest
 
 testmodules = [
     'test_tape',
-    'test_rule'
+    'test_rule',
+    'test_rulebook'
 ]
 suite = unittest.TestSuite()
 
