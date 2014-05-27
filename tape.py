@@ -25,7 +25,7 @@ class Tape:
             self.middle = self.left.popleft()
             self.left.append(self.empty)
         else:
-            self.middle = self.left.popleft()
+            self.middle = self.left.pop()
 
     def read(self):
         return self.middle
