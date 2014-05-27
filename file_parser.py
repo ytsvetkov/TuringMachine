@@ -29,7 +29,7 @@ def parse_tape_from_file(file_tape, line_counter):
         return SyntacticError('There is syntactic error \
                                 with this tape !', line_counter)
     else:
-        return tape.group().strip(')(').split(',')
+        return tape.group(2).strip(')(').split(',')
 
 
 def parse_states_from_file(file_states, line_counter):
