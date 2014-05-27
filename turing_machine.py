@@ -3,6 +3,12 @@ import rule
 import rule_book
 
 
+class StateError(Exception):
+
+    def __init__(self, message):
+        self.message = message
+
+
 class TuringMachine:
 
     def __init__(self, tapee, states, accept_states,
@@ -29,12 +35,16 @@ class TuringMachine:
             self.current_message == other.current_state and\
             self.head == other.head and self.rules == other.rules
 
-    def correct_states(self, states, final_states,
+    def correct_states(self, states, accept_states,
                        reject_states, current_state):
-        if not final_states in states and reject_states in states and\
-                current_state not in final_states and\
-                set(final_states).intersection(set(reject_states)):
-            raise TypeError
+        if set(accept_states).intersection(set(states)) == set():
+            raise StateError('Accept states not in "States" !')
+        elif set(reject_states).intersection(set(states)) == set():
+            raise StateError('Accept states not in "States" !')
+        elif set([current_state]).intersection(set(states)) == set():
+            raise StateError('Initial states not in "States" !')
+        elif set(accept_states).intersection(set(reject_states)):
+            raise StateError('Can\'t have state both accept and reject !')
 
     def run(self):
         print(self.tapee, "Initial tape")
