@@ -18,9 +18,17 @@ class Tape:
 
     def move_head_left(self):
         self.right.appendleft(self.middle)
-        self.middle = self.left.pop()
-        if not self.left:
-            self.left.append(Tape.empty)
+        # self.middle = self.left.pop()
+        # if not self.left:
+        #     self.left.append(Tape.empty)
+        if len(self.left) == 0:
+            self.middle = self.empty
+            self.left.append(self.empty)
+        elif len(self.left) == 1:
+            self.middle = self.left.popleft()
+            self.left.append(self.empty)
+        else:
+            self.middle = self.left.popleft()
 
     def read(self):
         return self.middle
