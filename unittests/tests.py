@@ -4,7 +4,9 @@ import unittest
 testmodules = [
     'test_tape',
     'test_rule',
-    'test_rulebook'
+    'test_rulebook',
+    'test_file_parser',
+    'test_input_parser'
 ]
 suite = unittest.TestSuite()
 
