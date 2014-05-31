@@ -51,7 +51,7 @@ def draw_automata(turing_machine=None):
     frame = Frame(root, width=800, height=600)
     frame.grid(row=0, column=0)
     canvas = Canvas(frame, bg='#FFFFFF', width=800, height=600,
-                    scrollregion=(0, -h * 15, w * 100, h * 15))
+                    scrollregion=(0, -h * 15, w * 100, h * 15*3))
     hbar = Scrollbar(frame, orient=HORIZONTAL)
     hbar.pack(side=BOTTOM, fill=X)
     hbar.config(command=canvas.xview)
