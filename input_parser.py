@@ -8,14 +8,14 @@ class SyntacticError(Exception):
         self.message = message
 
 
-user_tape_regex = r'^\s*\(.*,.,.*\)$'
+user_tape_regex = r'^\s*\(.*,.,.*\)\s*$'
 user_states_regex = r'^([0-9]*,)*[0-9]+$'
 user_initial_regex = r'^[0-9]+$'
 user_rule_regex = r'^\([0-9]{1,},.,.,[0-9]{1,},(Left|None|Right)\)$'
 
 
 def parse_tape_from_terminal(input_tape):
-    tape = re.match(user_tape_regex, input_tape.strip('\n'))
+    tape = re.match(user_tape_regex, input_tape.strip('\n '))
     if tape is None:
         return SyntacticError('There is syntactic error with this tape !')
     else:
