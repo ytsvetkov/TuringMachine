@@ -65,4 +65,4 @@ try:
     machine = machine_builder.machine_builder(*machine)
     animation.alien(machine)
 except IndexError:
-    
+    print("Can't open the file !")
