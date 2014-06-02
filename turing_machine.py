@@ -48,26 +48,35 @@ class TuringMachine:
 
     def run(self):
         print(self.tape)
+        applied_rule = self.step()
         while (self.current_state not in self.accept_states) and\
                 (self.current_state not in self.reject_states):
-
-            read_character = self.tape.read()
-            if self.rules.can_be_applied(self.current_state, read_character):
-                rule_to_apply = self.rules.get_rule(
-                    self.current_state, read_character)
-                self.tape.write(rule_to_apply.write_character)
-                if rule_to_apply.direction == 'Left':
-                    self.tape.move_head_left()
-                elif rule_to_apply.direction == 'Right':
-                    self.tape.move_head_right()
-                elif not rule_to_apply.direction == 'None':
-                    raise TypeError
-                self.current_state = rule_to_apply.next_state
-            else:
-                break
+            print(applied_rule)
             print(self.tape)
+            applied_rule = self.step()
+        print(applied_rule)
 
         if self.current_state in self.accept_states:
             return 'accept'
         elif self.current_state in self.reject_states:
             return 'reject'
+
+    def step(self):
+        if self.current_state in self.accept_states:
+            return 'accept'
+        elif self.current_state in self.reject_states:
+            return 'reject'
+
+        read_character = self.tape.read()
+        if self.rules.can_be_applied(self.current_state, read_character):
+            rule_to_apply = self.rules.get_rule(
+                self.current_state, read_character)
+            self.tape.write(rule_to_apply.write_character)
+            if rule_to_apply.direction == 'Left':
+                self.tape.move_head_left()
+            elif rule_to_apply.direction == 'Right':
+                self.tape.move_head_right()
+            elif not rule_to_apply.direction == 'None':
+                raise TypeError
+            self.current_state = rule_to_apply.next_state
+        return rule_to_apply
