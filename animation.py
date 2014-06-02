@@ -36,8 +36,10 @@ class alien:
             canvas_id = self.canvas.create_text(10 + i * cell_length, 175+100, font=("Default",30), anchor="nw")
             self.canvas.itemconfig(canvas_id)
             self.canvas.insert(canvas_id,12, "%c" % text[i])
-  
+    
+        return length, cell_length 
 
+    def draw_head(self, length, cell_length, rule=None):
         deg = 45
         leng = 150
         self.canvas.create_line(10+8.5*cell_length, 175+100, 10+8.5*cell_length+sin(2*pi/360*deg)*leng,175+100 - cos(2*pi/360*deg)*leng, width=2, fill='black')
@@ -47,8 +49,9 @@ class alien:
         self.canvas.create_line(10+8.5*cell_length+30, 175+100 - cos(2*pi/360*deg)*leng,10+8.5*cell_length+30, 10, width=2, fill='black')
         self.canvas.create_line(10+8.5*cell_length-30, 175+100 - cos(2*pi/360*deg)*leng,10+8.5*cell_length-30, 10, width=2, fill='black')
         self.canvas.create_line(10+8.5*cell_length-30, 10,10+8.5*cell_length+30, 10, width=2, fill='black')
-        
-        return
 
     def animation(self):
-        self.draw_tape()
+        while (self.machine.current_state not in self.machine.accept_states) and\
+                (self.machine.current_state not in self.machine.reject_states):
+            print(self.machine.tape)
+            print(self.machine.step())
