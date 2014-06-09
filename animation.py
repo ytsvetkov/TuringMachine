@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Tk, Canvas
 import time
 from math import cos, sin, pi
 
