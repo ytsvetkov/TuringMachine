@@ -47,19 +47,23 @@ class TuringMachine:
             raise StateError('Can\'t have state both accept and reject !')
 
     def run(self):
+        print()
         print(self.tape)
         applied_rule = self.step()
+        if applied_rule is None:
+            return '\nYour machine halted !!!\n'
         while (self.current_state not in self.accept_states) and\
                 (self.current_state not in self.reject_states):
-            print(applied_rule)
+            print('Rule to be applied: ', applied_rule, '\n')
             print(self.tape)
             applied_rule = self.step()
         print(applied_rule)
 
         if self.current_state in self.accept_states:
-            return 'accept'
+            return '\nYour word is accepted !!!\n'
         elif self.current_state in self.reject_states:
-            return 'reject'
+            return '\nYour word is rejected !!!\n'
+
 
     def step(self):
         if self.current_state in self.accept_states:
@@ -79,4 +83,6 @@ class TuringMachine:
             elif not rule_to_apply.direction == 'None':
                 raise TypeError
             self.current_state = rule_to_apply.next_state
+        else:
+            return
         return rule_to_apply

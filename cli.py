@@ -62,15 +62,18 @@ def main_cli_action():
 
 try:
     machine = file_parser.parse_validator_from_file(sys.argv[1])
-    print(machine_builder.machine_builder(*machine).run())
+    try:
+        print(machine_builder.machine_builder(*machine).run())
+    except TypeError:
+        print("Error with the machine !!!")
     draw_automata_decision = input(
-        "Do you want to see  a graphical representation ?\n")
+        "Do you want to see a graphical representation ?\n")
     if draw_automata_decision == 'y' or draw_automata_decision == 'yes':
         automata_graph.draw_automata(machine_builder.machine_builder(*machine))
 except IndexError:
     machine = main_cli_action()
     print(machine.run())
     draw_automata_decision = input(
-        "Do you want to see  a graphical representation ?\n")
+        "Do you want to see a graphical representation ?\n")
     if draw_automata_decision == 'y' or draw_automata_decision == 'yes':
         automata_graph.draw_automata(machine)
