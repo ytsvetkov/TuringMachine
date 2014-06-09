@@ -63,6 +63,6 @@ def main_cli_action():
 try:
     machine = file_parser.parse_validator_from_file(sys.argv[1])
     machine = machine_builder.machine_builder(*machine)
-    animation.alien(machine)
+    animation.Animate(machine)
 except IndexError:
     print("Can't open the file !")
