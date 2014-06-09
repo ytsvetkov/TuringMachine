@@ -2,7 +2,7 @@ from tkinter import *
 import time
 from math import cos, sin, pi
 
-class alien:
+class Animate:
 
     def __init__(self, machine=None):
         self.machine = machine
@@ -67,6 +67,7 @@ class alien:
             self.canvas.create_line(354, 275 - cos(2*pi/360*deg)*leng,
                                     354, 10, width=2)
             self.canvas.create_line(354, 10, 414, 10, width=2)
+
 
             rule=self.machine.step()
             if rule is None:
