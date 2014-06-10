@@ -1,4 +1,4 @@
-from tkinter import Tk, Canvas
+from tkinter import Tk, Canvas, PhotoImage, Label
 import time
 from math import cos, sin, pi
 
@@ -76,7 +76,7 @@ class Animate:
                 self.canvas.insert(canvas_id,12, "%s" % 'Halt !!!')
             self.canvas.delete(self.text_rule)
             self.text_rule = self.canvas.create_text(54 + 374-sin(2*pi/360*deg)*leng, 275 - cos(2*pi/360*deg)*leng, text="%s" % rule, font=("Default",12), anchor="nw")
-            time.sleep(0.05)
+            # time.sleep(0.05)
 
 
 
@@ -85,5 +85,19 @@ class Animate:
         self.canvas.itemconfig(canvas_id)
         if self.machine.current_state in self.machine.accept_states:
             self.canvas.insert(canvas_id,12, "%s" % 'Accept !!!')
-        else:
+            photo = PhotoImage(file="HappyTuring.gif")
+            label = Label(image=photo)
+            label.pack()
+            self.root.mainloop()
+        elif self.machine.current_state in self.machine.reject_states:
             self.canvas.insert(canvas_id,12, "%s" % 'Reject !!!')
+            photo = PhotoImage(file="SadTuring.gif")
+            label = Label(image=photo)
+            label.pack()
+            self.root.mainloop()
+        else:
+            self.canvas.insert(canvas_id,12, "%s" % 'Halt !!!')
+            photo = PhotoImage(file="ConfusedTuring.gif")
+            label = Label(image=photo)
+            label.pack()
+            self.root.mainloop() 
