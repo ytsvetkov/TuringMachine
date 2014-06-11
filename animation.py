@@ -71,9 +71,7 @@ class Animate:
 
             rule=self.machine.step()
             if rule is None:
-                canvas_id = self.canvas.create_text(0,0, font=("Default",30), anchor="nw")
-                self.canvas.itemconfig(canvas_id)
-                self.canvas.insert(canvas_id,12, "%s" % 'Halt !!!')
+                break
             self.canvas.delete(self.text_rule)
             self.text_rule = self.canvas.create_text(54 + 374-sin(2*pi/360*deg)*leng, 275 - cos(2*pi/360*deg)*leng, text="%s" % rule, font=("Default",12), anchor="nw")
             # time.sleep(0.05)
