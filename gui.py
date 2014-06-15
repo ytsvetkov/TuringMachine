@@ -64,4 +64,5 @@ try:
     machine = machine_builder.machine_builder(*machine)
     animation.Animate(machine)
 except IndexError:
-    print("Can't open the file !")
+    machine = main_cli_action()
+    animation.Animate(machine)
