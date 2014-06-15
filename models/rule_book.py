@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/home/thepuppeteer/Projects/Python/Project/models')
 import rule as _rule
 
 

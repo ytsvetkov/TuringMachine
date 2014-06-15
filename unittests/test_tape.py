@@ -1,6 +1,6 @@
 import unittest
 import sys
-sys.path.append('/home/thepuppeteer/Projects/Python/Project/')
+sys.path.append('/home/thepuppeteer/Projects/Python/Project/models')
 from tape import Tape
 
 

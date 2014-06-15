@@ -1,8 +1,8 @@
 import sys
 import re
-import rule as _rule
-import tape as _tape
-import turing_machine
+from models import rule as _rule
+from models import tape as _tape
+from models import turing_machine
 
 
 def machine_builder(tape, states, accept_states,

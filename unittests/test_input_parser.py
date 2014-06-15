@@ -1,7 +1,7 @@
 import sys
 import unittest
-sys.path.append('/home/thepuppeteer/Projects/Python/Project/')
-from input_parser import *
+sys.path.append('/home/thepuppeteer/Projects/Python/Project')
+from parsing.input_parser import *
 
 
 class InputParserTest(unittest.TestCase):

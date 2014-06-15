@@ -1,11 +1,10 @@
 import sys
 import os
 import re
-import file_parser
-import input_parser
+from parsing import file_parser
+from parsing import input_parser
 import machine_builder
-import animation
-from turing_machine import *
+from visualisation import animation
 
 
 tape = ''

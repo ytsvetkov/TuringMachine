@@ -1,8 +1,9 @@
 import sys
 import unittest
-sys.path.append('/home/thepuppeteer/Projects/Python/Project/')
+sys.path.append('/home/thepuppeteer/Projects/Python/Project/models')
 import rule
 import rule_book
+
 
 
 class RulesTest(unittest.TestCase):
