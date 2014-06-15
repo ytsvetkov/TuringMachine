@@ -1,8 +1,8 @@
+import os
 import sys
 import unittest
-sys.path.append('/home/thepuppeteer/Projects/Python/Project/models')
-import rule
-import rule_book
+sys.path.append(os.getcwd())
+from models import rule_book
 
 
 

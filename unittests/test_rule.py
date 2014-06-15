@@ -1,7 +1,8 @@
+import os
 import sys
 import unittest
-sys.path.append('/home/thepuppeteer/Projects/Python/Project//models')
-from rule import Rule
+sys.path.append(os.getcwd())
+from models.rule import Rule
 
 
 class RuleTest(unittest.TestCase):

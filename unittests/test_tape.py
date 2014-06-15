@@ -1,7 +1,8 @@
-import unittest
+import os
 import sys
-sys.path.append('/home/thepuppeteer/Projects/Python/Project/models')
-from tape import Tape
+import unittest
+sys.path.append(os.getcwd())
+from models.tape import Tape
 
 
 class TapeTest(unittest.TestCase):

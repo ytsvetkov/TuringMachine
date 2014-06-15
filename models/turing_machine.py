@@ -1,8 +1,10 @@
+import os
 import sys
-sys.path.append('/home/thepuppeteer/Projects/Python/Project/models')
-import tape as _tape
-import rule
-import rule_book
+sys.path.append(os.getcwd())
+from models import rule
+from models import rule_book
+from models import tape as _tape
+
 
 class StateError(Exception):
 

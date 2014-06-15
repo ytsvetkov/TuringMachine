@@ -1,6 +1,7 @@
+import os
 import sys
 import unittest
-sys.path.append('/home/thepuppeteer/Projects/Python/Project')
+sys.path.append(os.getcwd())
 from parsing.input_parser import *
 
 

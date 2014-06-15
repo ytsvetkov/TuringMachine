@@ -1,6 +1,7 @@
+import os
 import sys
-sys.path.append('/home/thepuppeteer/Projects/Python/Project/models')
-import rule as _rule
+sys.path.append(os.getcwd())
+from models import rule as _rule
 
 
 class Rule_Book:

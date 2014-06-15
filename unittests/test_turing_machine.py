@@ -1,8 +1,9 @@
+import os
 import sys
 import unittest
-sys.path.append('/home/thepuppeteer/Projects/Python/Project/models')
-from turing_machine import *
-from rule import *
+sys.path.append(os.getcwd())
+from models.turing_machine import *
+from models.rule import *
 
 
 class MachineTest(unittest.TestCase):
