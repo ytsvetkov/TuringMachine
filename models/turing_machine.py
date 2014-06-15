@@ -35,7 +35,7 @@ class TuringMachine:
         return self.tape == other.tape and self.states == other.states and\
             self.accept_states == other.accept_states and\
             self.reject_states == other.reject_states and\
-            self.current_message == other.current_state and\
+            self.current_state == other.current_state and\
             self.head == other.head and self.rules == other.rules
 
     def correct_states(self, states, accept_states,

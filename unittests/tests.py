@@ -7,7 +7,8 @@ testmodules = [
     'test_rulebook',
     'test_file_parser',
     'test_input_parser',
-    'test_turing_machine'
+    'test_turing_machine',
+    'test_builder'
 ]
 suite = unittest.TestSuite()
 
