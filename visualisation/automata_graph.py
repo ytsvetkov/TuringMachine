@@ -1,4 +1,5 @@
-from tkinter import *
+from tkinter import Tk, Frame, Canvas, Scrollbar, HORIZONTAL,\
+                    BOTTOM, X, VERTICAL, RIGHT, Y, LEFT, BOTH
 
 
 state_position = {}
@@ -30,12 +31,12 @@ def draw_arrow(i, j, canvas, counter, rule):
 
     if i < j:
         canvas_id = canvas.create_text(
-            10 + 80 * i, i + (-10) * counter * 1.7 + 385, anchor="nw")
+            10 + 80 * i, i + (-10) * counter * 1.7 + 384, anchor="nw")
         canvas.itemconfig(canvas_id, text="%s" % rule)
         canvas.insert(canvas_id, 12, "")
     elif i > j:
         canvas_id = canvas.create_text(
-            10 + 80 * i - 100, i + (-10) * counter * 1.7 + 385, anchor="nw")
+            10 + 80 * i - 110, i + (-10) * counter * 1.7 + 384, anchor="nw")
         canvas.itemconfig(canvas_id, text="%s" % rule)
         canvas.insert(canvas_id, 12, "")
 

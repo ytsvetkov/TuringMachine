@@ -11,7 +11,7 @@ class SyntacticError(Exception):
 user_tape_regex = r'^\s*\(.*,.,.*\)\s*$'
 user_states_regex = r'^([0-9]*,)*[0-9]+$'
 user_initial_regex = r'^[0-9]+$'
-user_rule_regex = r'^\([0-9]{1,},.,.,[0-9]{1,},(Left|None|Right)\)$'
+user_rule_regex = r'^\([0-9]{1,},.,.,.,[0-9]{1,},(Left|None|Right)\)$'
 
 
 def parse_tape_from_terminal(input_tape):
@@ -49,5 +49,5 @@ def parse_rule_from_terminal(input_rule):
     else:
         rule = input_rule.group().strip('\n)(').split(',')
         rule[0] = int(rule[0])
-        rule[3] = int(rule[3])
+        rule[4] = int(rule[4])
     return rule

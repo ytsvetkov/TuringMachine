@@ -6,7 +6,7 @@ from models import turing_machine
 
 
 def machine_builder(tape, states, accept_states,
-                    reject_states, initial_state, rules):
+                    reject_states, initial_state, stack, rules):
     return turing_machine.TuringMachine(tape, states, accept_states,
                                         reject_states, initial_state,
-                                        rules)
+                                        stack, rules)

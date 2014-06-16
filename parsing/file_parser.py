@@ -15,7 +15,7 @@ accept_states = set()
 reject_states = set()
 
 
-rule_regex = r'^\([0-9]{1,},.,.,[0-9]{1,},(Left|None|Right)\)$'
+rule_regex = r'^\([0-9]{1,},.,.,.,[0-9]{1,},(Left|None|Right)\)$'
 states_regex = r'^(states:\s*){(}|([0-9]*,)*[0-9]*}|[0-9]*})$'
 accept_regex = r'^(accept:\s*){(}|([0-9]*,)*[0-9]*}|[0-9]*})$'
 reject_regex = r'^(reject:\s*){(}|([0-9]*,)*[0-9]*}|[0-9]*})$'
@@ -85,12 +85,13 @@ def parse_rule_from_file(file_rule, line_counter):
     else:
         rule = file_rule.group().strip('\n)(').split(',')
         rule[0] = int(rule[0])
-        rule[3] = int(rule[3])
+        rule[4] = int(rule[4])
     return rule
 
 
 def parse_validator_from_file(program_name=None):
     line_counter = 1
+    stack = ''
     try:
         with open(program_name, "rt") as program:
             for line in program:
@@ -104,6 +105,9 @@ def parse_validator_from_file(program_name=None):
                     line_counter += 1
                 elif line[0] == 't':
                     tape = parse_tape_from_file(line, line_counter)
+                    line_counter += 1
+                elif line[:5] == 'stack':
+                    stack = line[6:-1]
                     line_counter += 1
                 elif line[0] == 's':
                     states = parse_states_from_file(line, line_counter)
@@ -126,4 +130,4 @@ def parse_validator_from_file(program_name=None):
         print('More specifically, the error lies within:\n', error.messed_line)
         raise
     return (tape, states, accept_states, reject_states,
-            initial_state, machine_rules)
+            initial_state, stack, machine_rules)

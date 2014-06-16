@@ -45,6 +45,7 @@ def main_cli_action():
 
     for i in range(5):
         machine_parts[i] = user_input(i, structures[i][1])
+    stack = input('Enter the initial stack\n')
 
     try:
         while True:
@@ -57,14 +58,15 @@ def main_cli_action():
     except EOFError:
         return machine_builder.machine_builder(
             machine_parts[0], machine_parts[1], machine_parts[2],
-            machine_parts[3], machine_parts[4], rules)
+            machine_parts[3], machine_parts[4], stack, rules)
 
 try:
     machine = file_parser.parse_validator_from_file(sys.argv[1])
     try:
         print(machine_builder.machine_builder(*machine).run())
-    except TypeError:
+    except TypeError as err:
         print("Error with the machine !!!")
+        print(err)
     draw_automata_decision = input(
         "Do you want to see a graphical representation ?\n")
     if draw_automata_decision == 'y' or draw_automata_decision == 'yes':

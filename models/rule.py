@@ -1,17 +1,19 @@
 class Rule:
 
     def __init__(self, current_state, read_character, write_character,
-                 next_state, direction):
+                 stack_character, next_state, direction):
         self.read_character = read_character
         self.write_character = write_character
+        self.stack_character = stack_character
         self.current_state = current_state
         self.next_state = next_state
         self.direction = direction
 
     def __repr__(self):
-        return '(({}-{})({}-{}-{}))'.format(self.current_state,
+        return '(({}-{})({}-{}-{}-{}))'.format(self.current_state,
                                             self.read_character,
                                             self.write_character,
+                                            self.stack_character,
                                             self.next_state,
                                             self.direction)
 

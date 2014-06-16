@@ -8,20 +8,20 @@ from models.rule import Rule
 class RuleTest(unittest.TestCase):
     
     def test_can_be_applied(self):
-        rule = Rule(1,'a', 'b', 2, 'Left')
+        rule = Rule(1,'a', 'b', 'v', 2, 'Left')
         self.assertTrue(rule.can_be_applied(1,'a'))
         self.assertFalse(rule.can_be_applied(2,'a'))
         self.assertFalse(rule.can_be_applied(1,'b'))
 
     def test_equality(self):
-        rule1 = Rule(1,'a', 'f', 2, 'None')
-        rule2 = Rule(1,'a', 'f', 2, 'None')
-        rule3 = Rule(1,'a', 'f', 3, 'None')
-        rule4 = Rule(2,'a', 'f', 3, 'None')
-        rule5 = Rule(2,'2', 'f', 3, 'None')
-        rule6 = Rule(2,'2', 'w', 3, 'None')
-        rule7 = Rule(2,'2', 'w', 3, 'Left')
-        rule8 = Rule(22,'A', 'C', 23, 'Right')
+        rule1 = Rule(1,'a', 'f', 'v',2, 'None')
+        rule2 = Rule(1,'a', 'f', 'v',2, 'None')
+        rule3 = Rule(1,'a', 'f', 'v',3, 'None')
+        rule4 = Rule(2,'a', 'f', 'v',3, 'None')
+        rule5 = Rule(2,'2', 'f', 'v',3, 'None')
+        rule6 = Rule(2,'2', 'w', 'v',3, 'None')
+        rule7 = Rule(2,'2', 'w', 'v',3, 'Left')
+        rule8 = Rule(22,'A', 'C', 'v',23, 'Right')
 
         self.assertTrue(rule1 == rule1)
         self.assertTrue(rule1 == rule2)
