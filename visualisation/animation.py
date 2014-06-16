@@ -7,7 +7,8 @@ class Animate:
 
     def __init__(self, machine=None):
         self.machine = machine
-        self.symbol = [1]*17
+        self.tape_symbol = [1]*17
+        self.stack_symbol = [1]*5
         self.text_rule = ''
 
         self.root = Tk()
@@ -29,6 +30,11 @@ class Animate:
         self.canvas.create_rectangle(10,275, 760, 325, width=2)
         for i in range(17):
             self.canvas.create_line(10 + i*44, 275, 10 + i * 44, 325, width=2)
+
+        self.canvas.create_rectangle(714, 10, 758, 230, width=2)
+        for i in range(5):
+            self.canvas.create_line(714, 10+i*44, 758, 10+i*44, width=2)
+
         deg = 45
         leng = 150
         self.canvas.create_line(384, 275, 384+sin(2*pi/360*deg)*leng,
@@ -77,10 +83,21 @@ class Animate:
             left_from_head = '_'*(8 - len(left_from_head)) + left_from_head
         text = left_from_head + head + right_from_head
         for i in range(17):
-            if self.symbol[i]:
-                self.canvas.delete(self.symbol[i])
-            self.symbol[i] = self.canvas.create_text(10 + i * 44, 275,
+            if self.tape_symbol[i]:
+                self.canvas.delete(self.tape_symbol[i])
+            self.tape_symbol[i] = self.canvas.create_text(10 + i * 44, 275,
                                                     text="%c" % text[i],
+                                                    font=("Default", 30),
+                                                    anchor="nw")
+        stack_text = ''
+        for i in range(min(5, len(self.machine.stack))):
+            stack_text += self.machine.stack[i] if self.machine.stack[i] is not None\
+                        else '_' + stack_text
+        for i in range(min(5, len(self.machine.stack))):
+            if self.stack_symbol[i]:
+                self.canvas.delete(self.stack_symbol[i])
+            self.stack_symbol[i] = self.canvas.create_text(714, 10+i*44,
+                                                    text="%c" % stack_text[i],
                                                     font=("Default", 30),
                                                     anchor="nw")
 
@@ -95,6 +112,10 @@ class Animate:
                                                 anchor="nw")
 
     def finalise(self):
+        stack_id = self.canvas.create_text(150, 350, font=("Default", 30),
+                                            anchor='nw')
+        self.canvas.itemconfig(stack_id)
+        self.canvas.insert(stack_id, 12, "%s" % ''.join(self.machine.stack))
         mesg = self.canvas.create_text(0, 0, font=("Default", 30), anchor="nw")
         self.canvas.itemconfig(mesg)
         if self.machine.current_state in self.machine.accept_states:
@@ -115,3 +136,4 @@ class Animate:
             label = Label(image=photo)
             label.pack()
             self.root.mainloop()
+
