@@ -58,12 +58,24 @@ class MachineTest(unittest.TestCase):
         self.assertNotEqual(machine1, machine4)
 
     def test_step(self):
-        machine1 = TuringMachine(['aaaaaa', 'a', 'aaa'],
+        machine = TuringMachine(['aaaaaa', 'a', 'aaa'],
                                     {0, 1, 2, 3, 4, 5, 6, 7}, {5}, {6}, 0, None,
                                     [[0, 'a', '_', '_', 1, 'Right'],
                                     [1, 'a', 'c', '_', 3, 'Right']],)
-        self.assertTrue(machine1.step(), Rule(*[0, 'a', '_', '_', 1,'Right']))
-        self.assertTrue(machine1.step(), Rule(*[1, 'a', 'c', '_', 3,'Right']))
+        machine1 = TuringMachine(['aaaaaa_', 'a', 'aa'],
+                                    {0, 1, 2, 3, 4, 5, 6, 7}, {5}, {6}, 1, None,
+                                    [[0, 'a', '_', '_', 1, 'Right'],
+                                    [1, 'a', 'c', '_', 3, 'Right']],)
+        machine2 = TuringMachine(['aaaaaa_c', 'a', 'a'],
+                                    {0, 1, 2, 3, 4, 5, 6, 7}, {5}, {6}, 3, None,
+                                    [[0, 'a', '_', '_', 1, 'Right'],
+                                    [1, 'a', 'c', '_', 3, 'Right']],)
+        self.assertTrue(machine.step(), Rule(*[0, 'a', '_', '_', 1,'Right']))
+        self.assertEqual(machine, machine1)
+        self.assertTrue(machine.step(), Rule(*[1, 'a', 'c', '_', 3,'Right']))
+        self.assertEqual(machine, machine2)
+        self.assertNotEqual(machine, machine1)
+
 
 if __name__ == '__main__':
     unittest.main()

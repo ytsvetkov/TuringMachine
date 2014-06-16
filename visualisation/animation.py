@@ -104,6 +104,7 @@ class Animate:
         rule = self.machine.step()
         if rule is None:
             self.finalise()
+            return
         else:
             self.canvas.delete(self.text_rule)
             self.text_rule = self.canvas.create_text(54 + 374-sin(pi/4)*150,

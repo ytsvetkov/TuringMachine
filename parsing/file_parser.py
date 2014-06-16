@@ -71,8 +71,7 @@ def parse_reject_states_from_file(file_reject_states, line_counter):
 def parse_initial_from_file(file_initial_state, line_counter):
     initial = re.match(initial_regex, file_initial_state.strip('\n'))
     if initial is None:
-        return SyntacticError('There is syntactic error \
-                                with the initial state !', line_counter)
+        return SyntacticError('There is syntactic error with the initial state !', line_counter)
     else:
         return int(initial.group(2))
 
@@ -127,7 +126,7 @@ def parse_validator_from_file(program_name=None):
                     raise SyntacticError('There is syntactic error.', line_counter)
     except SyntacticError as error:
         print(error.message)
-        print('More specifically, the error lies within:\n', error.messed_line)
+        print('More specifically, the error lies somewhere on line', error.messed_line)
         raise
     return (tape, states, accept_states, reject_states,
             initial_state, stack, machine_rules)
