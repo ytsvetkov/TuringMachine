@@ -35,7 +35,7 @@ class TuringMachine:
         self.rules = rule_book.Rule_Book(rules)
 
     def __repr__(self):
-        return '{}-{}-{}-{}-{}-{}-{}'.format(self.tape, self.states,self.stack,
+        return '{}-{}-{}-{}-{}-{}-{}'.format(self.tape, self.states, self.stack,
                                           self.accept_states, self.rules,
                                           self.current_state, self.head)
 

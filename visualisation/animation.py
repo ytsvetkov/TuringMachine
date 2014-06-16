@@ -1,6 +1,6 @@
-from tkinter import Tk, Canvas, PhotoImage, Label, Button, DISABLED
 import time
 from math import cos, sin, pi
+from tkinter import Tk, Canvas, PhotoImage, Label, Button, DISABLED
 
 
 class Animate:
@@ -56,16 +56,16 @@ class Animate:
         while (self.machine.current_state not in self.machine.accept_states) and\
                 (self.machine.current_state not in self.machine.reject_states):
             self.step()
-            # time.sleep(0.7)
+            time.sleep(0.7)
         self.finalise()
 
     def step(self):
-        if self.machine.current_state in self.machine.accept_states:
+        if self.machine.current_state in self.machine.accept_states or\
+            self.machine.current_state in self.machine.reject_states:
             self.finalise()
-        elif self.machine.current_state in self.machine.reject_states:
-            self.finalise()
+            return
 
-        self.canvas.update()
+
         left_from_head = ''
         right_from_head = ''
         head = str(self.machine.tape.middle)
@@ -104,12 +104,14 @@ class Animate:
         rule = self.machine.step()
         if rule is None:
             self.finalise()
-        self.canvas.delete(self.text_rule)
-        self.text_rule = self.canvas.create_text(54 + 374-sin(pi/4)*150,
-                                                275 - cos(pi/4)*150,
-                                                text="%s" % rule,
-                                                font=("Default", 12),
-                                                anchor="nw")
+        else:
+            self.canvas.delete(self.text_rule)
+            self.text_rule = self.canvas.create_text(54 + 374-sin(pi/4)*150,
+                                                    275 - cos(pi/4)*150,
+                                                    text="%s" % rule,
+                                                    font=("Default", 12),
+                                                    anchor="nw")
+            self.canvas.update()
 
     def finalise(self):
         stack_id = self.canvas.create_text(150, 350, font=("Default", 30),
@@ -136,4 +138,3 @@ class Animate:
             label = Label(image=photo)
             label.pack()
             self.root.mainloop()
-
