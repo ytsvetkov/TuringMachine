@@ -56,7 +56,7 @@ class Animate:
         while (self.machine.current_state not in self.machine.accept_states) and\
                 (self.machine.current_state not in self.machine.reject_states):
             self.step()
-            time.sleep(0.7)
+            # time.sleep(0.7)
         self.finalise()
 
     def step(self):
