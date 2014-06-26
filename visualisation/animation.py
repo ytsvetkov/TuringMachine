@@ -1,6 +1,6 @@
 import time
 from math import cos, sin, pi
-from tkinter import Tk, Canvas, PhotoImage, Label, Button, DISABLED
+from tkinter import Tk, Canvas, PhotoImage, Label, Button, DISABLED, TclError
 
 
 class Animate:
@@ -55,9 +55,12 @@ class Animate:
     def animate(self):
         while (self.machine.current_state not in self.machine.accept_states) and\
                 (self.machine.current_state not in self.machine.reject_states):
-            self.step()
-            # time.sleep(0.7)
+            try:
+                self.step()
+            except TclError:
+                return
         self.finalise()
+        return
 
     def step(self):
         if self.machine.current_state in self.machine.accept_states or\
