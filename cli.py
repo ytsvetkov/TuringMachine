@@ -87,3 +87,5 @@ except IndexError:
             "Do you want to see a graphical representation ?\n")
         if draw_automata_decision == 'y' or draw_automata_decision == 'yes':
             automata_graph.draw_automata(machine)
+except ZeroDivisionError:
+    pass

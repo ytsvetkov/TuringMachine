@@ -24,62 +24,74 @@ tape_regex = r'^(tape:\s*)(\((.)*,(.)*,(.)*\))$'
 
 
 def parse_tape_from_file(file_tape, line_counter):
+
     tape = re.match(tape_regex, file_tape.strip('\n'))
     if tape is None:
-        return SyntacticError('There is syntactic error \
+        raise SyntacticError('There is syntactic error \
                                 with this tape !', line_counter)
     else:
         return tape.group(2).strip(')(').split(',')
 
 
 def parse_states_from_file(file_states, line_counter):
+
     states = re.match(states_regex, file_states.strip('\n'))
     if states is None:
-        return SyntacticError('There is syntactic error \
+        raise SyntacticError('There is syntactic error \
                                 with these states !', line_counter)
     else:
         machine_states = set()
+        if states.group(2).strip('}').split(',') == ['']:
+            return set()
         for state in states.group(2).strip('}').split(','):
             machine_states.add(int(state))
         return machine_states
 
 
 def parse_accept_states_from_file(file_accept_states, line_counter):
+
     accept_states = re.match(accept_regex, file_accept_states.strip('\n'))
     if accept_states is None:
-        return SyntacticError('There is syntactic error with these states !',
+        raise SyntacticError('There is syntactic error with these states !',
                               line_counter)
     else:
         machine_states = set()
+        if accept_states.group(2).strip('}').split(',') == ['']:
+            return set()
         for state in accept_states.group(2).strip('}').split(','):
             machine_states.add(int(state))
         return machine_states
 
 
 def parse_reject_states_from_file(file_reject_states, line_counter):
+
     reject_states = re.match(reject_regex, file_reject_states.strip('\n'))
     if reject_states is None:
-        return SyntacticError('There is syntactic error with these states !',
+        raise SyntacticError('There is syntactic error with these states !',
                               line_counter)
     else:
         machine_states = set()
+        if reject_states.group(2).strip('}').split(',') == ['']:
+            return set()
         for state in reject_states.group(2).strip('}').split(','):
             machine_states.add(int(state))
         return machine_states
 
 
 def parse_initial_from_file(file_initial_state, line_counter):
+
     initial = re.match(initial_regex, file_initial_state.strip('\n'))
     if initial is None:
-        return SyntacticError('There is syntactic error with the initial state !', line_counter)
+        raise SyntacticError('There is syntactic error with the initial state !', line_counter)
     else:
         return int(initial.group(2))
 
 
 def parse_rule_from_file(file_rule, line_counter):
+
     file_rule = re.match(rule_regex, file_rule)
     if file_rule is None:
-        return SyntacticError('There is syntactic error with this rule !',
+        raise SyntacticError('There is syntactic error with this rule !',
                               line_counter)
     else:
         rule = file_rule.group().strip('\n)(').split(',')
@@ -127,6 +139,6 @@ def parse_validator_from_file(program_name=None):
     except SyntacticError as error:
         print(error.message)
         print('More specifically, the error lies somewhere on line', error.messed_line)
-        raise
+        raise ZeroDivisionError
     return (tape, states, accept_states, reject_states,
             initial_state, stack, machine_rules)

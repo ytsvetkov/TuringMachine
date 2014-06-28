@@ -74,6 +74,8 @@ try:
     machine = file_parser.parse_validator_from_file(sys.argv[1])
     machine = machine_builder.machine_builder(*machine)
     animation.Animate(machine)
+except ZeroDivisionError:
+    pass
 except (input_parser.SyntacticError, file_parser.SyntacticError):
     pass
 except IndexError:
