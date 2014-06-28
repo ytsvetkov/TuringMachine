@@ -18,9 +18,9 @@ class InputParserTest(unittest.TestCase):
         self.assertEqual(test_tape2, correct_tape2)
 
     def test_states_parsing(self):
-        test_states1 = {1,2,3}
-        test_states2 = {1,2,4}
-        test_states3 = {1,4,3}
+        test_states1 = {1, 2, 3}
+        test_states2 = {1, 2, 4}
+        test_states3 = {1, 4, 3}
         parsed_states1 = parse_states_from_terminal('1,2,3\n')
         parsed_states2 = parse_states_from_terminal('1,2,4\n')
         parsed_states3 = parse_states_from_terminal('1,4,3\n')
@@ -39,14 +39,22 @@ class InputParserTest(unittest.TestCase):
             self.assertNotEqual(1212, parse_initial_from_terminal('1212  '))
 
     def test_rules(self):
-        self.assertEqual([1,'a','a','v',1,'None'], parse_rule_from_terminal('(1,a,a,v,1,None)'))
-        self.assertEqual([1,'a','b','v',2,'Left'], parse_rule_from_terminal('(1,a,b,v,2,Left)'))
-        self.assertEqual([1,'a','a','v',1,'Right'], parse_rule_from_terminal('(1,a,a,v,1,Right)'))
-        self.assertNotEqual([2,'a','a','v',1,'Right'], parse_rule_from_terminal('(1,a,a,v,1,Right)'))
-        self.assertNotEqual([1,'b','a','v',1,'Right'], parse_rule_from_terminal('(1,a,a,v,1,Right)'))
-        self.assertNotEqual([1,'a','v','v',1,'Right'], parse_rule_from_terminal('(1,a,a,v,1,Right)'))
-        self.assertNotEqual([1,'a','a','v',3,'Right'], parse_rule_from_terminal('(1,a,a,v,1,Right)'))
-        self.assertNotEqual([1,'a','a','v',1,'Left'], parse_rule_from_terminal('(1,a,a,v,1,Right)'))
+        self.assertEqual([1, 'a', 'a', 'v', 1, 'None'],
+                         parse_rule_from_terminal('(1,a,a,v,1,None)'))
+        self.assertEqual([1, 'a', 'b', 'v', 2, 'Left'],
+                         parse_rule_from_terminal('(1,a,b,v,2,Left)'))
+        self.assertEqual([1, 'a', 'a', 'v', 1, 'Right'],
+                         parse_rule_from_terminal('(1,a,a,v,1,Right)'))
+        self.assertNotEqual([2, 'a', 'a', 'v', 1, 'Right'],
+                            parse_rule_from_terminal('(1,a,a,v,1,Right)'))
+        self.assertNotEqual([1, 'b', 'a', 'v', 1, 'Right'],
+                            parse_rule_from_terminal('(1,a,a,v,1,Right)'))
+        self.assertNotEqual([1, 'a', 'v', 'v', 1, 'Right'],
+                            parse_rule_from_terminal('(1,a,a,v,1,Right)'))
+        self.assertNotEqual([1, 'a', 'a', 'v', 3, 'Right'],
+                            parse_rule_from_terminal('(1,a,a,v,1,Right)'))
+        self.assertNotEqual([1, 'a', 'a', 'v', 1, 'Left'],
+                            parse_rule_from_terminal('(1,a,a,v,1,Right)'))
 
 if __name__ == '__main__':
     unittest.main()

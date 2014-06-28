@@ -11,11 +11,11 @@ class Rule:
 
     def __repr__(self):
         return '(({}-{})({}-{}-{}-{}))'.format(self.current_state,
-                                            self.read_character,
-                                            self.write_character,
-                                            self.stack_character,
-                                            self.next_state,
-                                            self.direction)
+                                               self.read_character,
+                                               self.write_character,
+                                               self.stack_character,
+                                               self.next_state,
+                                               self.direction)
 
     def __eq__(self, other):
         return self.read_character == other.read_character and\

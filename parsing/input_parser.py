@@ -36,7 +36,8 @@ def parse_states_from_terminal(input_states):
 def parse_initial_from_terminal(input_initial_state):
     initial = re.match(user_initial_regex, input_initial_state.strip('\n'))
     if initial is None:
-        raise SyntacticError('There is syntactic error with the initial state !')
+        raise SyntacticError('There is syntactic error with the'
+                             'initial state !')
     else:
         return int(initial.group())
 

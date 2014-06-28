@@ -1,6 +1,5 @@
 from tkinter import Tk, Frame, Canvas, Scrollbar, HORIZONTAL,\
-                    BOTTOM, X, VERTICAL, RIGHT, Y, LEFT, BOTH
-
+    BOTTOM, X, VERTICAL, RIGHT, Y, LEFT, BOTH
 
 state_position = {}
 loop_occurrences = {}
@@ -9,8 +8,9 @@ loop_occurrences = {}
 def draw_arrow(i, j, canvas, counter, rule):
     if i == j:
         canvas.create_oval(10 + 80 * i, 410, 10 + 80 * i + 20 + 5, 440)
-        canvas_id = canvas.create_text(
-            10 + 80 * i - 10, 445 + 30 * loop_occurrences[i], anchor="nw", font=("Default", 9))
+        canvas_id = canvas.create_text(10 + 80 * i - 10,
+                                       445 + 30 * loop_occurrences[i],
+                                       anchor="nw", font=("Default", 9))
         loop_occurrences[i] += 1
         message = str(rule)[1:-2].split(")(")
         canvas.itemconfig(canvas_id, text="%s" %

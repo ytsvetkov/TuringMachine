@@ -35,9 +35,10 @@ class TuringMachine:
         self.rules = rule_book.Rule_Book(rules)
 
     def __repr__(self):
-        return '{}-{}-{}-{}-{}-{}-{}'.format(self.tape, self.states, self.stack,
-                                          self.accept_states, self.rules,
-                                          self.current_state, self.head)
+        return '{}-{}-{}-{}-{}-{}-{}'.format(self.tape, self.states,
+                                             self.stack, self.accept_states,
+                                             self.rules, self.current_state,
+                                             self.head)
 
     def __eq__(self, other):
         return self.tape == other.tape and self.states == other.states and\
@@ -77,7 +78,6 @@ class TuringMachine:
             return '\nYour word is accepted !!!\n'
         elif self.current_state in self.reject_states:
             return '\nYour word is rejected !!!\n'
-
 
     def step(self):
         if self.current_state in self.accept_states:

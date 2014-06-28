@@ -31,10 +31,12 @@ machine_parts = {0: tape,
                  4: initial_state
                  }
 
+
 def user_input(i, struct=None):
     struct = input(structures[i][0])
     struct = structures[i][1](struct)
     return struct
+
 
 def user_rule(i, struct=None):
     try:
@@ -43,6 +45,7 @@ def user_rule(i, struct=None):
         rules.append(rule)
     except input_parser.SyntacticError as err:
         print(err.message)
+
 
 def main_cli_action():
 

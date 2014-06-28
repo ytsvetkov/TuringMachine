@@ -41,6 +41,7 @@ def user_input(i, struct=None):
         else:
             return struct
 
+
 def user_rule(i, struct=None):
     try:
         rule = input('Enter a rule\n')
@@ -48,6 +49,7 @@ def user_rule(i, struct=None):
         rules.append(rule)
     except input_parser.SyntacticError as err:
         print(err.message)
+
 
 def main_cli_action():
 
